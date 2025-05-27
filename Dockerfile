@@ -1,8 +1,13 @@
+# =============================
+# Dockerfile
+# =============================
 FROM alpine:latest
 
-RUN apk update && apk add --no-cache git build-base libevent-dev openssl-dev zlib-dev
+RUN apk add --no-cache git build-base libevent-dev openssl-dev
 
-RUN git clone https://github.com/TelegramMessenger/MTProxy.git /opt/MTProxy
+WORKDIR /opt
+
+RUN git clone https://github.com/TelegramMessenger/MTProxy.git
 
 WORKDIR /opt/MTProxy
 
@@ -10,10 +15,10 @@ RUN make
 
 EXPOSE 443
 
-CMD ["./objs/bin/mtproto-proxy", \
+CMD ["objs/bin/mtproto-proxy", \
     "-u", "nobody", \
     "-p", "8888", \
     "-H", "443", \
-    "-S", "abcdef1234567890abcdef1234567890", \
+    "-S", "0123456789abcdef0123456789abcdef", \
     "--aes-pwd", "proxy-secret", "proxy-multi.conf", \
     "-M", "1"]
