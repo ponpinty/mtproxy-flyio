@@ -10,4 +10,10 @@ RUN make
 
 EXPOSE 443
 
-CMD ["./objs/bin/mtproto-proxy", "-u", "nobody", "-p", "8888", "-H", "443", "-S", "abcdef1234567890abcdef1234567890", "--aes-pwd", "proxy-secret", "proxy-multi.conf", "-M", "1"]
+CMD ["./objs/bin/mtproto-proxy", \
+     "-u", "nobody", \
+     "-p", "8888", \
+     "-H", "443", \
+     "-S", "abcdef1234567890abcdef1234567890", \
+     "--aes-pwd", "proxy-secret", "proxy-multi.conf", \
+     "-M", "1"]
